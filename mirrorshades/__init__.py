@@ -1,8 +1,5 @@
-#! /usr/bin/env python3
-#
 # Copyright (c) 2020 Paul Barker <pbarker@konsulko.com>
 # SPDX-License-Identifier: Apache-2.0
-#
 
 import yaml
 
@@ -42,7 +39,3 @@ def main():
         properties["name"] = name
         method = get_connection_method(properties)
         method.mirror()
-
-
-if __name__ == "__main__":
-    main()
