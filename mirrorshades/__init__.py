@@ -4,7 +4,7 @@
 import yaml
 
 
-class ConnectionMethod:
+class Agent:
     def __init__(self, properties):
         self.properties = properties
 
@@ -12,23 +12,23 @@ class ConnectionMethod:
         raise NotImplementedError
 
 
-class Gitlab(ConnectionMethod):
+class Gitlab(Agent):
     pass
 
 
-class Git(ConnectionMethod):
+class Git(Agent):
     pass
 
 
-connection_methods = {"gitlab": Gitlab, "git": Git}
+agents = {"gitlab": Gitlab, "git": Git}
 
 
-def get_connection_method(properties):
+def get_agent(properties):
     # The default connection method for a source is the name of the source
     # itself
-    method_name = properties.get("connection_method", properties.get("name"))
-    method_ctor = connection_methods[method_name]
-    return method_ctor(properties)
+    agent_name = properties.get("agent", properties.get("name"))
+    agent_ctor = agents[agent_name]
+    return agent_ctor(properties)
 
 
 def main():
@@ -37,5 +37,5 @@ def main():
 
     for name, properties in config.items():
         properties["name"] = name
-        method = get_connection_method(properties)
-        method.mirror()
+        agent = get_agent(properties)
+        agent.mirror()
