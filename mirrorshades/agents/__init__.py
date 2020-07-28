@@ -8,7 +8,7 @@ from .gitlab import Gitlab
 agents = {"gitlab": Gitlab, "git": Git}
 
 
-def get_agent(properties):
+def get(properties):
     # The default connection method for a source is the name of the source
     # itself
     agent_name = properties.get("agent", properties.get("name"))
