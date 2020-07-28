@@ -22,7 +22,8 @@ class Config:
         self.cfg = cfg
 
     def sources(self):
-        return [Source(name, properties) for name, properties in self.cfg.items()]
+        cfg_sources = self.cfg.get("sources", [])
+        return [Source(name, properties) for name, properties in cfg_sources.items()]
 
 
 def load_config(filename):
