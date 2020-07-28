@@ -4,6 +4,27 @@
 import yaml
 
 
+from .agents import get_agent
+
+
+class Source:
+    def __init__(self, name, properties):
+        self.properties = properties
+        self.properties["name"] = name
+        self.agent = get_agent(properties)
+
+    def mirror(self):
+        return self.agent.mirror()
+
+
+class Config:
+    def __init__(self, cfg):
+        self.cfg = cfg
+
+    def sources(self):
+        return [Source(name, properties) for name, properties in self.cfg.items()]
+
+
 def load_config(filename):
     f = open(filename, "r")
-    return yaml.safe_load(f)
+    return Config(yaml.safe_load(f))

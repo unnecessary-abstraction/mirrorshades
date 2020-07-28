@@ -24,7 +24,7 @@ class Gitlab(Agent):
             group = gl.groups.get(group_path)
             for project in group.projects.list(include_subgroups=True):
                 repositories.append(project.path_with_namespace)
-        
+
         for project_path in projects:
             project = gl.projects.get(project_path)
             repositories.append(project.path_with_namespace)
@@ -35,7 +35,7 @@ class Gitlab(Agent):
         git_properties = {
             "name": name,
             "url_prefix": url_prefix,
-            "repositories": repositories
+            "repositories": repositories,
         }
         git = Git(git_properties)
         git.mirror()
