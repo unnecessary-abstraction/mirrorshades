@@ -10,9 +10,7 @@ from . import agents
 _CONFIG = {}
 
 
-DEFAULT_OPTIONS = {
-    "dest": ""
-}
+DEFAULT_OPTIONS = {"dest": ""}
 
 
 class Source:

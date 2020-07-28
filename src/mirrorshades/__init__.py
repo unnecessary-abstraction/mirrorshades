@@ -11,11 +11,19 @@ __version__ = "0.1.0-dev"
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(prog="mirrorshades", description="Data mirroring tool")
-    parser.add_argument("config_path", default="mirrorshades.yml", nargs="?",
-                        help="path to the configuration file (defaults to 'mirrorshades.yml' "
-                             "in the current directory)")
-    parser.add_argument("--version", action="version", version=f"mirrorshades {__version__}")
+    parser = argparse.ArgumentParser(
+        prog="mirrorshades", description="Data mirroring tool"
+    )
+    parser.add_argument(
+        "config_path",
+        default="mirrorshades.yml",
+        nargs="?",
+        help="path to the configuration file (defaults to 'mirrorshades.yml' "
+        "in the current directory)",
+    )
+    parser.add_argument(
+        "--version", action="version", version=f"mirrorshades {__version__}"
+    )
     return parser.parse_args()
 
 
