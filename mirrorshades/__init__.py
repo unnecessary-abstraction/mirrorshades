@@ -1,11 +1,24 @@
 # Copyright (c) 2020 Paul Barker <pbarker@konsulko.com>
 # SPDX-License-Identifier: Apache-2.0
 
+import argparse
+
+
 from . import config
 
 
+__version__ = "0.1.0-dev"
+
+
 def main():
-    cfg = config.load("local/mirrorshades.yml")
+    parser = argparse.ArgumentParser(prog="mirrorshades", description="Data mirroring tool")
+    parser.add_argument("config_path", default="mirrorshades.yml", nargs="?",
+                        help="path to the configuration file (defaults to 'mirrorshades.yml' "
+                             "in the current directory)")
+    parser.add_argument("--version", action="version", version=f"mirrorshades {__version__}")
+    args = parser.parse_args()
+
+    cfg = config.load(args.config_path)
 
     for source in cfg.sources():
         source.mirror()
