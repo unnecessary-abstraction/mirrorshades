@@ -7,6 +7,14 @@ import yaml
 from . import agents
 
 
+_CONFIG = {}
+
+
+DEFAULT_OPTIONS = {
+    "dest": ""
+}
+
+
 class Source:
     def __init__(self, name, properties):
         self.properties = properties
@@ -25,7 +33,18 @@ class Config:
         cfg_sources = self.cfg.get("sources", [])
         return [Source(name, properties) for name, properties in cfg_sources.items()]
 
+    def option(self, name):
+        options = self.cfg.get("options", {})
+        default_value = DEFAULT_OPTIONS.get(name)
+        return options.get(name, default_value)
+
 
 def load(filename):
+    global _CONFIG
     f = open(filename, "r")
-    return Config(yaml.safe_load(f))
+    _CONFIG = Config(yaml.safe_load(f))
+    return _CONFIG
+
+
+def get():
+    return _CONFIG

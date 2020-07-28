@@ -6,6 +6,7 @@ import subprocess
 from urllib.parse import urljoin
 
 
+from .. import config
 from .base import Agent
 
 
@@ -26,10 +27,11 @@ class Git(Agent):
         name = self.properties.get("name")
         url_prefix = self.properties.get("url_prefix", "")
         repositories = self.properties.get("repositories")
+        dest = config.get().option("dest")
 
         for repo in repositories:
             url = urljoin(url_prefix, repo)
-            local_path = os.path.join("local", name, repo)
+            local_path = os.path.join(dest, name, repo)
             if not local_path.endswith(".git"):
                 local_path += ".git"
 
