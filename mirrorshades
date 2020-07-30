@@ -1,0 +1,13 @@
+#! /usr/bin/env python3
+# Copyright (c) 2020 Paul Barker <pbarker@konsulko.com>
+# SPDX-License-Identifier: Apache-2.0
+
+from os.path import dirname, join
+import sys
+
+src_path = join(dirname(__file__), "src")
+sys.path.insert(0, src_path)
+
+import mirrorshades
+
+mirrorshades.main()
