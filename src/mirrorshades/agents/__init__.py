@@ -1,11 +1,18 @@
 # Copyright (c) 2020 Paul Barker <pbarker@konsulko.com>
 # SPDX-License-Identifier: Apache-2.0
 
+from .command import Command
 from .git import Git
 from .gitlab import Gitlab
+from .rclone import RClone
 
 
-agents = {"gitlab": Gitlab, "git": Git}
+agents = {
+    "command": Command,
+    "gitlab": Gitlab,
+    "git": Git,
+    "rclone": RClone,
+}
 
 
 def get(properties):

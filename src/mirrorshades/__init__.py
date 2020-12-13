@@ -7,7 +7,7 @@ import argparse
 from . import config
 
 
-__version__ = "0.1.0-dev1"
+__version__ = "0.1.0-dev2"
 
 
 def parse_args():
