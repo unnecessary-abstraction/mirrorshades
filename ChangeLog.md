@@ -8,3 +8,5 @@ Initial release of mirrorshades.
 
 * Supports mirroring git repositories from a GitLab server using project or
   group paths. For groups, all projects within the group are mirrored.
+
+* Supports invoking custom commands to mirror from arbitrary sources.
