@@ -4,12 +4,14 @@
 from .command import Command
 from .git import Git
 from .gitlab import Gitlab
+from .rclone import RClone
 
 
 agents = {
     "command": Command,
     "gitlab": Gitlab,
     "git": Git,
+    "rclone": RClone,
 }
 
 

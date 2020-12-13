@@ -9,4 +9,6 @@ Initial release of mirrorshades.
 * Supports mirroring git repositories from a GitLab server using project or
   group paths. For groups, all projects within the group are mirrored.
 
+* Supports mirroring from remote and cloud storage locations using rclone.
+
 * Supports invoking custom commands to mirror from arbitrary sources.
