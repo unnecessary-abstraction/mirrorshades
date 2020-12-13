@@ -1,5 +1,15 @@
 # ChangeLog for mirrorshades
 
+## 0.1.2
+
+Bugfix release of mirrorshades.
+
+* Make dependency on `gitlab` python module optional.
+
+## 0.1.1
+
+(yanked)
+
 ## 0.1.0
 
 Initial release of mirrorshades.
