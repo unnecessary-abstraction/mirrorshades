@@ -1,4 +1,4 @@
 mirrorshades
 ============
 
-Git repository mirroring tool written in Python.
+Mirroring tool written in Python.
