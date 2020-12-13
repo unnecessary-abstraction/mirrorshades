@@ -1,7 +1,7 @@
 # Copyright (c) 2020 Paul Barker <pbarker@konsulko.com>
 # SPDX-License-Identifier: Apache-2.0
 
-import gitlab
+import sys
 from urllib.parse import urlparse
 
 
@@ -11,6 +11,19 @@ from .git import Git
 
 class Gitlab(Agent):
     def mirror(self):
+        try:
+            import gitlab
+        except ModuleNotFoundError:
+            print(
+                "The `gitlab` python package is needed to mirror from GitLab.",
+                file=sys.stderr,
+            )
+            print(
+                "Please install this (for example, using `pip install gitlab`) and try again.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+
         name = self.properties.get("name")
         private_token = self.properties.get("private_token")
         server = self.properties.get("server", "https://gitlab.com")
