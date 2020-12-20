@@ -1,5 +1,11 @@
 # ChangeLog for mirrorshades
 
+## 0.1.3
+
+Minor release of mirrorshades.
+
+* Add setup.py script to support legacy build environments.
+
 ## 0.1.2
 
 Bugfix release of mirrorshades.
