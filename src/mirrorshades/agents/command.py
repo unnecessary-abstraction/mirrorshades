@@ -4,7 +4,6 @@
 import subprocess
 
 
-from .. import config
 from .base import Agent
 
 

@@ -8,6 +8,6 @@ import sys
 src_path = join(dirname(__file__), "src")
 sys.path.insert(0, src_path)
 
-import mirrorshades
+import mirrorshades  # noqa: E402
 
 mirrorshades.main()
