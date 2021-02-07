@@ -1,3 +1,6 @@
+# Copyright (c) 2020 Paul Barker <pbarker@konsulko.com>
+# SPDX-License-Identifier: CC0-1.0
+
 # Allow users to keep local configuration files in the project directory
 # without the risk of accidentally committing them
 /local

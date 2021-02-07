@@ -1,3 +1,8 @@
+<!--
+Copyright (c) 2020 Paul Barker <pbarker@konsulko.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # mirrorshades
 
 Mirroring tool written in Python.

@@ -1,3 +1,8 @@
+<!--
+Copyright (c) 2020 Paul Barker <pbarker@konsulko.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # ChangeLog for mirrorshades
 
 ## 0.1.3
