@@ -51,6 +51,9 @@ installed if you wish to use them in your configuration:
 
 * `git`: Requires the [git](https://git-scm.com/) command line tool.
 
+* `github`: Requires the Python module [PyGithub](https://pypi.org/project/PyGithub/)
+  and the [git](https://git-scm.com/) command line tool.
+
 * `gitlab`: Requires the Python module [python-gitlab](https://pypi.org/project/python-gitlab/)
   and the [git](https://git-scm.com/) command line tool.
 
@@ -112,6 +115,37 @@ sources:
       # shown here) will mirror 'https://git.example.com/myrepository.git'
       # to '/srv/mirror/git/myrepository.git'.
       - myrepository.git
+
+  # 'github' agent: Mirror repositories from a Github instance by full name,
+  # user or organization. Note that this agent only mirrors git repository data
+  # and not issues, merge requests, etc. Each git repository is mirrored using
+  # the 'git' agent.
+  github:
+
+    # Access token. This may be set to allow access to private repositories.
+    access_token: ...
+
+    # List of users to mirror. Each user will be looked up using the Github API
+    # and the git repositories which they own will be mirrored. The destination
+    # path is formed in the same way as for the 'git' agent using the repository
+    # clone url without the 'https://github.com/' prefix.
+    users:
+      - myusername
+
+    # List of organizations to mirror. Each organization will be looked up using
+    # the Github API and their git repositories will be mirrored. The
+    # destination path is formed in the same way as for the 'git' agent using
+    # the repository clone url without the 'https://github.com/' prefix.
+    organizations:
+      - myorganization
+
+    # List of individual repositories to mirror, identified by their full name
+    # (formed of the user or organization name, a '/' and then the repository
+    # name). The destination path is formed in the same way as for the 'git'
+    # agent using the repository clone url without the 'https://github.com/'
+    # prefix.
+    repositories:
+      - torvalds/linux
 
   # 'gitlab' agent: Mirror groups and projects from a GitLab instance.
   # Note that this agent only mirrors git repository data and not issues,
