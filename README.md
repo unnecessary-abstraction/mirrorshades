@@ -16,6 +16,16 @@ is usually sufficient to install the application:
 pip install mirrorshades
 ```
 
+The following mirroring agents have additional dependencies which must be
+installed if you wish to use them in your configuration:
+
+* `git`: Requires the [git](https://git-scm.com/) command line tool.
+
+* `gitlab`: Requires the Python module [python-gitlab](https://pypi.org/project/python-gitlab/)
+  and the [git](https://git-scm.com/) command line tool.
+
+* `rclone`: Requires the [rclone](https://rclone.org/) command line tool.
+
 ## Usage
 
 Most options for mirrorshades are set via a YAML configuration file commandline
