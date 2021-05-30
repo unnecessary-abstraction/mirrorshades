@@ -15,11 +15,12 @@ class Gitlab(Agent):
             import gitlab
         except ModuleNotFoundError:
             print(
-                "The `gitlab` python package is needed to mirror from GitLab.",
+                "The `python-gitlab` python package is needed to mirror from GitLab.",
                 file=sys.stderr,
             )
             print(
-                "Please install this (for example, using `pip install gitlab`) and try again.",
+                "Please install this (for example, using `pip install python-gitlab`)"
+                " and try again.",
                 file=sys.stderr,
             )
             sys.exit(1)
