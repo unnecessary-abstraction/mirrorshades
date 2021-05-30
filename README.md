@@ -1,5 +1,5 @@
 <!--
-Copyright (c) 2020 Paul Barker <pbarker@konsulko.com>
+Copyright (c) 2020-2021 Paul Barker <paul@pbarker.dev>
 SPDX-License-Identifier: CC-BY-4.0
 -->
 
