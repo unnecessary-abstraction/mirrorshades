@@ -7,6 +7,36 @@ SPDX-License-Identifier: CC-BY-4.0
 
 Mirroring tool written in Python.
 
+Copyright (c) 2020-2021 Paul Barker.
+
+Code distributed under the [Apache 2.0 License](https://choosealicense.com/licenses/apache-2.0/),
+documentation distributed under the [CC BY 4.0 License](https://creativecommons.org/licenses/by/4.0/).
+
+## Summary
+
+Mirrorshades was written to help maintain mirrors and backups by regularly
+pulling content from remote locations. Tools such as rsync, rclone, `git clone
+--mirror`, etc already exist and can easily be used to create local mirrors of
+remote content. What mirrorshades provides is a single command to update a set
+of mirrors of different types of content from various remote sources. For
+example, the author uses mirrorshades to sync content from Dropbox, GitLab and
+multiple mail servers to a local mirror on a nightly basis for disaster
+recovery purposes.
+
+All the details of how to pull down the desired content are stored in the
+configuration file, it is intended that command line arguments to mirrorshades
+remain as minimal as possible and that the config file is the single source of
+truth to control the operation of the utility. This makes it very easy to invoke
+mirrorshades regularly and reliably using cron, systemd timers or any other
+automation mechanism.
+
+Mirrorshades is intended to be trivial to extend to handle new types of remote
+source. Users familiar with Python are encouraged to look at the source code
+for the existing mirroring agents and to add new agents as required. Such
+extensions or other modifications to mirrorshades are welcome to be submitted
+following the [contribution guidelines](#contribution), we will greatly
+appreciate them!
+
 ## Installation
 
 Mirrorshades is published on [PyPI](https://pypi.org/) so the following command
@@ -28,8 +58,8 @@ installed if you wish to use them in your configuration:
 
 ## Usage
 
-Most options for mirrorshades are set via a YAML configuration file commandline
-invocation is very straightforward:
+All significant options for mirrorshades are set via a YAML configuration file
+so command line invocation is very straightforward:
 
 ```
 usage: mirrorshades [-h] [--version] [config_path]
@@ -150,11 +180,24 @@ sources:
 
 ## Contribution
 
-mirrorshades is developed on [GitLab](https://gitlab.com/) at
-<https://gitlab.com/pbarker.dev/mirrorshades>.
+mirrorshades is developed on [sourcehut](https://sr.ht/) at
+<https://sr.ht/~pbarker/mirrorshades/>.
 
 If you find any bugs or have a feature request feel free to open a ticket in
-the [issue tracker](https://gitlab.com/pbarker.dev/mirrorshades/-/issues).
+the [issue tracker](https://todo.sr.ht/~pbarker/mirrorshades).
 
-To submit patches to mirrorshades please fork the repository on GitLab and
-[open a merge request](https://gitlab.com/pbarker.dev/mirrorshades/-/merge_requests).
+To submit patches to mirrorshades please
+[send them to my public inbox](mailto:~pbarker/public-inbox@lists.sr.ht?subject=[mirrorshades])
+with `[mirrorshades]` in the subject line. Please use
+[plain text email](https://useplaintext.email/) when sending messages to this
+list. Submitted patches and other discussions may be found in the
+[archives](https://lists.sr.ht/~pbarker/public-inbox) of this mailing list. The
+following commands can be used to configure git to format patches appropriately:
+
+```
+git config format.to '~pbarker/public-inbox@lists.sr.ht'
+git config format.subjectPrefix 'mirrorshades][PATCH'
+```
+
+Further instructions on how to set up git to send emails can be found at
+[git-send-email.io](https://git-send-email.io/).
