@@ -36,3 +36,4 @@ def release(c, version):
     c.run(f"git tag -a -F dist/RELEASE_NOTES.txt 'v{version}' HEAD")
     with c.cd("dist"):
         c.run("sha256sum * > SHA256SUMS")
+        c.run("gpg --detach-sign -a SHA256SUMS")
