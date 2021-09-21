@@ -7,8 +7,6 @@ from dataclasses import dataclass
 from typing import List
 from urllib.parse import urljoin
 
-import desert
-
 from .. import config
 from .base import Agent
 
@@ -25,22 +23,19 @@ def do_clone(url, local_path):
     subprocess.run(["git", "clone", "--mirror", "-q", url, local_path], check=True)
 
 
-@dataclass
-class GitProperties:
-    name: str
-    repositories: List[str]
-    url_prefix: str = ""
-
-
 class Git(Agent):
+    @dataclass
+    class Properties:
+        name: str
+        repositories: List[str]
+        url_prefix: str = ""
+
     def mirror(self):
-        schema = desert.schema(GitProperties)
-        props = schema.load(self.properties)
         dest = config.get().option("dest")
 
-        for repo in props.repositories:
-            url = urljoin(props.url_prefix, repo)
-            local_path = os.path.join(dest, props.name, repo)
+        for repo in self.properties.repositories:
+            url = urljoin(self.properties.url_prefix, repo)
+            local_path = os.path.join(dest, self.properties.name, repo)
             if not local_path.endswith(".git"):
                 local_path += ".git"
 

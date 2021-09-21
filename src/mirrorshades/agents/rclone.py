@@ -3,24 +3,28 @@
 
 import os
 import subprocess
-
+from dataclasses import dataclass
+from typing import List
 
 from .. import config
 from .base import Agent
 
 
 class RClone(Agent):
+    @dataclass
+    class Properties:
+        name: str
+        remote: str
+        paths: List[str]
+
     def mirror(self):
-        name = self.properties.get("name")
-        remote = self.properties.get("remote")
-        paths = self.properties.get("paths")
         dest = config.get().option("dest")
 
-        for path in paths:
+        for path in self.properties.paths:
             if path == ".":
                 path = ""
-            full_path = ":".join([remote, path])
-            local_path = os.path.join(dest, name, path)
+            full_path = ":".join([self.properties.remote, path])
+            local_path = os.path.join(dest, self.properties.name, path)
             subprocess.run(
                 ["rclone", "sync", "--create-empty-src-dirs", full_path, local_path],
                 check=True,

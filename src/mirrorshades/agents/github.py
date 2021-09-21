@@ -2,11 +2,11 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import sys
-
+from dataclasses import dataclass, field
+from typing import List
 
 from .base import Agent
 from .git import Git
-
 
 GITHUB_URL = "https://github.com/"
 
@@ -18,6 +18,14 @@ def make_relative_url(url):
 
 
 class Github(Agent):
+    @dataclass
+    class Properties:
+        name: str
+        access_token: str
+        users: List[str] = field(default_factory=list)
+        organizations: List[str] = field(default_factory=list)
+        repositories: List[str] = field(default_factory=list)
+
     def mirror(self):
         try:
             import github
@@ -33,34 +41,29 @@ class Github(Agent):
             )
             sys.exit(1)
 
-        name = self.properties.get("name")
-        access_token = self.properties.get("access_token")
-        users = self.properties.get("users", [])
-        organizations = self.properties.get("organizations", [])
-        repo_fullnames = self.properties.get("repositories")
         repositories = []
 
-        gh = github.Github(access_token)
+        gh = github.Github(self.properties.access_token)
 
-        for username in users:
+        for username in self.properties.users:
             user = gh.get_user(username)
             for repo in user.get_repos(type="owner"):
                 relative_url = make_relative_url(repo.clone_url)
                 repositories.append(relative_url)
 
-        for orgname in organizations:
+        for orgname in self.properties.organizations:
             org = gh.get_organization(orgname)
             for repo in org.get_repos():
                 relative_url = make_relative_url(repo.clone_url)
                 repositories.append(relative_url)
 
-        for fullname in repo_fullnames:
+        for fullname in self.properties.repositories:
             repo = gh.get_repo(fullname)
             relative_url = make_relative_url(repo.clone_url)
             repositories.append(relative_url)
 
         git_properties = {
-            "name": name,
+            "name": self.properties.name,
             "url_prefix": GITHUB_URL,
             "repositories": repositories,
         }

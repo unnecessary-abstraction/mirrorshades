@@ -2,12 +2,16 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import subprocess
-
+from dataclasses import dataclass
 
 from .base import Agent
 
 
 class Command(Agent):
+    @dataclass
+    class Properties:
+        name: str
+        command: str
+
     def mirror(self):
-        command = self.properties.get("command")
-        subprocess.run(command, shell=True, check=True)
+        subprocess.run(self.properties.command, shell=True, check=True)
