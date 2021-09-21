@@ -3,9 +3,7 @@
 
 import yaml
 
-
 from . import agents
-
 
 _CONFIG = {}
 

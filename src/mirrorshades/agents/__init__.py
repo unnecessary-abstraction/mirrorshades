@@ -7,7 +7,6 @@ from .github import Github
 from .gitlab import Gitlab
 from .rclone import RClone
 
-
 agents = {
     "command": Command,
     "git": Git,
