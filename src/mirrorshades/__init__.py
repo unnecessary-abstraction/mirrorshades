@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import argparse
+import logging
 
 from . import config
 
@@ -26,6 +27,7 @@ def parse_args():
 
 
 def main():
+    logging.basicConfig(format="%(levelname)s: %(message)s")
     args = parse_args()
     cfg = config.load(args.config_path)
 
