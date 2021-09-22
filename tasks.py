@@ -13,7 +13,7 @@ def install(c):
 @task
 def build(c):
     """Build the project"""
-    c.run("python3 -m pep517.build .")
+    c.run("python3 -m build .")
 
 
 @task
