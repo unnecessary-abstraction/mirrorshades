@@ -23,6 +23,12 @@ def clean(c):
 
 
 @task
+def test(c):
+    """Check code correctness"""
+    c.run("pre-commit run -a")
+
+
+@task
 def release(c, version):
     """Release a version of the project"""
     clean(c)
