@@ -1,6 +1,7 @@
 # Copyright (c) 2020-2021 Paul Barker <paul@pbarker.dev>
 # SPDX-License-Identifier: Apache-2.0
 
+import logging
 import sys
 from dataclasses import dataclass, field
 from typing import List
@@ -23,14 +24,12 @@ class Gitlab(Agent):
         try:
             import gitlab
         except ModuleNotFoundError:
-            print(
-                "The `python-gitlab` python package is needed to mirror from GitLab.",
-                file=sys.stderr,
+            logging.error(
+                "The `python-gitlab` python package is needed to mirror from GitLab."
             )
-            print(
-                "Please install this (for example, using `pip install python-gitlab`)"
-                " and try again.",
-                file=sys.stderr,
+            logging.info(
+                "Please install `python-gitlab` (for example, using `pip install python-gitlab`)"
+                " and try again."
             )
             sys.exit(1)
 

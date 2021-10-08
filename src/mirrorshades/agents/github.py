@@ -1,6 +1,7 @@
 # Copyright (c) 2021 Paul Barker <paul@pbarker.dev>
 # SPDX-License-Identifier: Apache-2.0
 
+import logging
 import sys
 from dataclasses import dataclass, field
 from typing import List
@@ -30,14 +31,12 @@ class Github(Agent):
         try:
             import github
         except ModuleNotFoundError:
-            print(
-                "The `PyGithub` python package is needed to mirror from Github.",
-                file=sys.stderr,
+            logging.error(
+                "The `PyGithub` python package is needed to mirror from Github."
             )
-            print(
-                "Please install this (for example, using `pip install PyGithub`)"
-                " and try again.",
-                file=sys.stderr,
+            logging.info(
+                "Please install `PyGithub` (for example, using `pip install PyGithub`)"
+                " and try again."
             )
             sys.exit(1)
 
