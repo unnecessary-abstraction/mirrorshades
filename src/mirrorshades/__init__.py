@@ -27,7 +27,7 @@ def parse_args():
 
 
 def main():
-    logging.basicConfig(format="%(levelname)s: %(message)s")
+    logging.basicConfig(format="%(levelname)s: %(message)s", level=logging.INFO)
     args = parse_args()
     cfg = config.load(args.config_path)
 
