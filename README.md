@@ -211,6 +211,12 @@ sources:
 
     # The command to run along with any arguments.
     command: mbsync -a
+
+    # Number of attempts to make. If the command fails, it is retried up to this
+    # number of times. If the command succeeds it is not retried. This property
+    # is optional, if it is unspecified the default is to only make one attempt
+    # to run the command.
+    attempts: 5
 ```
 
 ## Contribution
