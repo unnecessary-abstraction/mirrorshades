@@ -1,4 +1,4 @@
-# Copyright (c) 2021 Paul Barker <paul@pbarker.dev>
+# Copyright (c) 2022 Paul Barker <paul@pbarker.dev>
 # SPDX-License-Identifier: Apache-2.0
 
 import logging
@@ -20,8 +20,7 @@ def make_relative_url(url):
 
 class Github(Agent):
     @dataclass
-    class Properties:
-        name: str
+    class Properties(Agent.Properties):
         access_token: str
         users: List[str] = field(default_factory=list)
         organizations: List[str] = field(default_factory=list)
@@ -63,6 +62,7 @@ class Github(Agent):
 
         git_properties = {
             "name": self.properties.name,
+            "agent": "git",
             "url_prefix": GITHUB_URL,
             "repositories": repositories,
         }

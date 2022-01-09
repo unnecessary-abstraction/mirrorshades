@@ -1,4 +1,4 @@
-# Copyright (c) 2020-2021 Paul Barker <paul@pbarker.dev>
+# Copyright (c) 2020-2022 Paul Barker <paul@pbarker.dev>
 # SPDX-License-Identifier: Apache-2.0
 
 import subprocess
@@ -9,8 +9,7 @@ from .base import Agent
 
 class Command(Agent):
     @dataclass
-    class Properties:
-        name: str
+    class Properties(Agent.Properties):
         command: str
 
     def mirror(self):

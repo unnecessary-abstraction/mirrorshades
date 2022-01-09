@@ -28,8 +28,7 @@ def do_clone(url, local_path):
 
 class Git(Agent):
     @dataclass
-    class Properties:
-        name: str
+    class Properties(Agent.Properties):
         repositories: List[str]
         url_prefix: str = ""
 

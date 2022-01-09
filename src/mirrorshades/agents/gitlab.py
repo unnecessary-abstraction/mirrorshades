@@ -1,4 +1,4 @@
-# Copyright (c) 2020-2021 Paul Barker <paul@pbarker.dev>
+# Copyright (c) 2020-2022 Paul Barker <paul@pbarker.dev>
 # SPDX-License-Identifier: Apache-2.0
 
 import logging
@@ -13,8 +13,7 @@ from .git import Git
 
 class Gitlab(Agent):
     @dataclass
-    class Properties:
-        name: str
+    class Properties(Agent.Properties):
         private_token: str
         server: str = "https://gitlab.com"
         groups: List[str] = field(default_factory=list)
@@ -53,6 +52,7 @@ class Gitlab(Agent):
         url_prefix = url._replace(netloc=location_with_auth).geturl()
         git_properties = {
             "name": self.properties.name,
+            "agent": "git",
             "url_prefix": url_prefix,
             "repositories": repositories,
         }

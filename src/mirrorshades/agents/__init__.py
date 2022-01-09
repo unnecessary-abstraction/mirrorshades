@@ -1,4 +1,4 @@
-# Copyright (c) 2020-2021 Paul Barker <paul@pbarker.dev>
+# Copyright (c) 2020-2022 Paul Barker <paul@pbarker.dev>
 # SPDX-License-Identifier: Apache-2.0
 
 import logging
@@ -22,10 +22,11 @@ agents = {
 def get(properties):
     # The default connection method for a source is the name of the source
     # itself
-    agent_name = properties.get("agent", properties.get("name"))
+    if "agent" not in properties:
+        properties["agent"] = properties["name"]
     try:
-        agent_ctor = agents[agent_name]
+        agent_ctor = agents[properties["agent"]]
     except KeyError:
-        logging.error(f"No such agent: {agent_name}")
+        logging.error(f"No such agent: {properties['agent']}")
         sys.exit(1)
     return agent_ctor(properties)
