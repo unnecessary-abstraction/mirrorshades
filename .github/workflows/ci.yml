@@ -1,0 +1,18 @@
+# Copyright (c) 2021-2022 Paul Barker <paul@pbarker.dev>
+# SPDX-License-Identifier: Apache-2.0
+
+name: CI
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+
+      - name: Run pre-commit checks
+        uses: pre-commit/action@v2.0.3
