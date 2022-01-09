@@ -1,9 +1,35 @@
 <!--
-Copyright (c) 2020-2021 Paul Barker <paul@pbarker.dev>
+Copyright (c) 2020-2022 Paul Barker <paul@pbarker.dev>
 SPDX-License-Identifier: CC-BY-4.0
 -->
 
 # ChangeLog for mirrorshades
+
+## 0.2.0 (in development)
+
+* Move project to GitHub, the new project URL is
+  <https://github.com/unnecessary-abstraction/mirrorshades>.
+
+* Add GitHub mirroring support.
+
+* Prune deleted branches when updating a mirrored git repository.
+
+* Support multiple attempts when running custom commands.
+
+* Add config validation using [desert](https://pypi.org/project/desert/)
+  and [marshmallow](https://pypi.org/project/marshmallow/).
+
+* Update and expand README file.
+
+* Improve developer & contributor workflows
+  with the addition of automatic linting & formatting.
+  These checks are ran in GitHub Actions
+  when contributing to the project via a pull request.
+  They can also be ran locally using
+  [pre-commit](https://pre-commit.com/).
+
+* Satisfy the [REUSE Specification](https://reuse.software/spec/)
+  to ensure licensing is clear.
 
 ## 0.1.3
 
