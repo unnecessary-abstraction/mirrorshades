@@ -1,13 +1,14 @@
 <!--
-Copyright (c) 2020-2021 Paul Barker <paul@pbarker.dev>
+Copyright (c) 2020-2022 Paul Barker <paul@pbarker.dev>
 SPDX-License-Identifier: CC-BY-4.0
 -->
 
 # mirrorshades
 
-Mirroring tool written in Python.
+[mirrorshades](https://github.com/unnecessary-abstraction/mirrorshades)
+is a tool for mirroring data from remote sources.
 
-Copyright (c) 2020-2021 Paul Barker.
+Copyright (c) 2020-2022 Paul Barker.
 
 Code distributed under the [Apache 2.0 License](https://choosealicense.com/licenses/apache-2.0/),
 documentation distributed under the [CC BY 4.0 License](https://creativecommons.org/licenses/by/4.0/).
@@ -210,28 +211,23 @@ sources:
 
     # The command to run along with any arguments.
     command: mbsync -a
+
+    # Number of attempts to make. If the command fails, it is retried up to this
+    # number of times. If the command succeeds it is not retried. This property
+    # is optional, if it is unspecified the default is to only make one attempt
+    # to run the command.
+    attempts: 5
 ```
 
 ## Contribution
 
-mirrorshades is developed on [sourcehut](https://sr.ht/) at
-<https://sr.ht/~pbarker/mirrorshades/>.
+mirrorshades is developed on GitHub at
+<https://github.com/unnecessary-abstraction/mirrorshades>.
 
-If you find any bugs or have a feature request feel free to open a ticket in
-the [issue tracker](https://todo.sr.ht/~pbarker/mirrorshades).
+If you find any bugs or have a feature request feel free to open a ticket in the
+[issue tracker](https://github.com/unnecessary-abstraction/mirrorshades/issues).
 
-To submit patches to mirrorshades please
-[send them to my public inbox](mailto:~pbarker/public-inbox@lists.sr.ht?subject=[mirrorshades])
-with `[mirrorshades]` in the subject line. Please use
-[plain text email](https://useplaintext.email/) when sending messages to this
-list. Submitted patches and other discussions may be found in the
-[archives](https://lists.sr.ht/~pbarker/public-inbox) of this mailing list. The
-following commands can be used to configure git to format patches appropriately:
-
-```
-git config format.to '~pbarker/public-inbox@lists.sr.ht'
-git config format.subjectPrefix 'mirrorshades][PATCH'
-```
-
-Further instructions on how to set up git to send emails can be found at
-[git-send-email.io](https://git-send-email.io/).
+To submit patches to mirrorshades please fork the repository on GitHub and open
+a [pull request](https://github.com/unnecessary-abstraction/mirrorshades/pulls)
+where your changes are ready to merge. Pull requests should generally be
+targeted at the `dev` branch.

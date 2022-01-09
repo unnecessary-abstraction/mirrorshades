@@ -1,4 +1,4 @@
-# Copyright (c) 2020-2021 Paul Barker <paul@pbarker.dev>
+# Copyright (c) 2020-2022 Paul Barker <paul@pbarker.dev>
 # SPDX-License-Identifier: Apache-2.0
 
 
@@ -14,6 +14,7 @@ class Agent:
     @dataclass
     class Properties:
         name: str
+        agent: str
 
     def __init__(self, properties):
         schema = desert.schema(self.Properties)

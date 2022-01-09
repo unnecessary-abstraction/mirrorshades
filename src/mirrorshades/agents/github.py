@@ -1,10 +1,11 @@
-# Copyright (c) 2021 Paul Barker <paul@pbarker.dev>
+# Copyright (c) 2022 Paul Barker <paul@pbarker.dev>
 # SPDX-License-Identifier: Apache-2.0
 
 import logging
 import sys
 from dataclasses import dataclass, field
 from typing import List
+from urllib.parse import urlparse
 
 from .base import Agent
 from .git import Git
@@ -20,8 +21,7 @@ def make_relative_url(url):
 
 class Github(Agent):
     @dataclass
-    class Properties:
-        name: str
+    class Properties(Agent.Properties):
         access_token: str
         users: List[str] = field(default_factory=list)
         organizations: List[str] = field(default_factory=list)
@@ -61,9 +61,13 @@ class Github(Agent):
             relative_url = make_relative_url(repo.clone_url)
             repositories.append(relative_url)
 
+        url = urlparse(GITHUB_URL)
+        location_with_auth = f"{self.properties.access_token}@{url.netloc}"
+        url_prefix = url._replace(netloc=location_with_auth).geturl()
         git_properties = {
             "name": self.properties.name,
-            "url_prefix": GITHUB_URL,
+            "agent": "git",
+            "url_prefix": url_prefix,
             "repositories": repositories,
         }
         git = Git(git_properties)

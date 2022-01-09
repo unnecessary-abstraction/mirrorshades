@@ -1,4 +1,4 @@
-# Copyright (c) 2020-2021 Paul Barker <paul@pbarker.dev>
+# Copyright (c) 2020-2022 Paul Barker <paul@pbarker.dev>
 # SPDX-License-Identifier: Apache-2.0
 
 import logging
@@ -14,7 +14,9 @@ from .base import Agent
 
 def do_fetch(url, local_path):
     logging.info(f"Fetching in {local_path}")
-    subprocess.run(["git", "fetch", "--all", "-q"], cwd=local_path, check=True)
+    subprocess.run(
+        ["git", "fetch", "--all", "--prune", "-q"], cwd=local_path, check=True
+    )
 
 
 def do_clone(url, local_path):
@@ -26,8 +28,7 @@ def do_clone(url, local_path):
 
 class Git(Agent):
     @dataclass
-    class Properties:
-        name: str
+    class Properties(Agent.Properties):
         repositories: List[str]
         url_prefix: str = ""
 
