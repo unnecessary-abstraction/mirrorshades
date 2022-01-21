@@ -10,8 +10,13 @@ is a tool for mirroring data from remote sources.
 
 Copyright (c) 2020-2022 Paul Barker.
 
-Code distributed under the [Apache 2.0 License](https://choosealicense.com/licenses/apache-2.0/),
-documentation distributed under the [CC BY 4.0 License](https://creativecommons.org/licenses/by/4.0/).
+In this repository,
+code files are distributed under the
+[Apache 2.0 License](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0)),
+documentation files are distributed under the
+[CC BY 4.0 License](https://tldrlegal.com/license/creative-commons-attribution-4.0-international-(cc-by-4))
+and trivial data files are distributed under the
+[CC0 1.0 License](https://tldrlegal.com/license/creative-commons-cc0-1.0-universal).
 
 ## Summary
 
