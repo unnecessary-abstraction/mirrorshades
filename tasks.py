@@ -38,7 +38,7 @@ def release(c, version):
     c.run(f"git commit -s -m 'Release {version}' src/mirrorshades/__init__.py")
     build(c)
     c.run(f"echo mirrorshades {version} > dist/RELEASE_NOTES.txt")
-    c.run(f"markdown-extract -fri '^{version}' ChangeLog.md >> dist/RELEASE_NOTES.txt")
+    c.run(f"markdown-extract -n '^{version}' ChangeLog.md >> dist/RELEASE_NOTES.txt")
     c.run(f"git tag -a -F dist/RELEASE_NOTES.txt 'v{version}' HEAD")
     with c.cd("dist"):
         c.run("sha256sum * > SHA256SUMS")
