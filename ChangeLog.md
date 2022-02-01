@@ -5,7 +5,9 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # ChangeLog for mirrorshades
 
-## 0.2.0 (in development)
+## 0.2.0
+
+Development release of mirrorshades.
 
 * Move project to GitHub, the new project URL is
   <https://github.com/unnecessary-abstraction/mirrorshades>.
