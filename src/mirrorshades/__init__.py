@@ -1,13 +1,12 @@
-# Copyright (c) 2020 Paul Barker <pbarker@konsulko.com>
+# Copyright (c) 2020-2021 Paul Barker <paul@pbarker.dev>
 # SPDX-License-Identifier: Apache-2.0
 
 import argparse
-
+import logging
 
 from . import config
 
-
-__version__ = "0.1.3"
+__version__ = "0.2.0"
 
 
 def parse_args():
@@ -28,6 +27,7 @@ def parse_args():
 
 
 def main():
+    logging.basicConfig(format="%(levelname)s: %(message)s", level=logging.INFO)
     args = parse_args()
     cfg = config.load(args.config_path)
 

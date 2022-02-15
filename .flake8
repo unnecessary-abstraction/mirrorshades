@@ -1,0 +1,7 @@
+# Copyright (c) 2021 Paul Barker <paul@pbarker.dev>
+# SPDX-License-Identifier: Apache-2.0
+
+[flake8]
+select = BLK,C,E,F,W
+ignore = E203,W503
+max-line-length = 100

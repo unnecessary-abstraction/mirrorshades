@@ -1,6 +1,9 @@
+# Copyright (c) 2020-2021 Paul Barker <paul@pbarker.dev>
+# SPDX-License-Identifier: Apache-2.0
+
 [build-system]
 requires = [
-  "setuptools >= 40.9.0",
+  "setuptools >= 42.0.0",
   "wheel",
 ]
 build-backend = "setuptools.build_meta"

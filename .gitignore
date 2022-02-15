@@ -1,3 +1,6 @@
+# Copyright (c) 2020-2021 Paul Barker <paul@pbarker.dev>
+# SPDX-License-Identifier: CC0-1.0
+
 # Allow users to keep local configuration files in the project directory
 # without the risk of accidentally committing them
 /local
@@ -26,3 +29,5 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+
+/release

@@ -1,11 +1,9 @@
-# Copyright (c) 2020 Paul Barker <pbarker@konsulko.com>
+# Copyright (c) 2020-2021 Paul Barker <paul@pbarker.dev>
 # SPDX-License-Identifier: Apache-2.0
 
 import yaml
 
-
 from . import agents
-
 
 _CONFIG = {}
 
