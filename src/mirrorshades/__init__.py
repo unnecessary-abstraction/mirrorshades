@@ -4,8 +4,6 @@
 import argparse
 import logging
 
-from . import config
-
 __version__ = "0.2.1-dev"
 
 
@@ -27,6 +25,8 @@ def parse_args():
 
 
 def main():
+    from . import config
+
     logging.basicConfig(format="%(levelname)s: %(message)s", level=logging.INFO)
     args = parse_args()
     cfg = config.load(args.config_path)
