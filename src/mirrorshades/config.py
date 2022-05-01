@@ -51,7 +51,9 @@ def parse_sources():
     global sources
 
     cfg_sources = cfg.get("sources", [])
-    sources = [Source(name, properties) for name, properties in cfg_sources.items()]
+    sources = {
+        name: Source(name, properties) for name, properties in cfg_sources.items()
+    }
 
 
 def load(filename):
