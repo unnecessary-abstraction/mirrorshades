@@ -19,7 +19,7 @@ class Gitlab(Agent):
         groups: List[str] = field(default_factory=list)
         projects: List[str] = field(default_factory=list)
 
-    def mirror(self):
+    def do_mirror(self):
         try:
             import gitlab
         except ModuleNotFoundError:

@@ -17,7 +17,7 @@ class RClone(Agent):
         remote: str
         paths: List[str]
 
-    def mirror(self):
+    def do_mirror(self):
         dest = config.get().option("dest")
 
         for path in self.properties.paths:

@@ -32,7 +32,7 @@ class Git(Agent):
         repositories: List[str]
         url_prefix: str = ""
 
-    def mirror(self):
+    def do_mirror(self):
         dest = config.get().option("dest")
 
         for repo in self.properties.repositories:

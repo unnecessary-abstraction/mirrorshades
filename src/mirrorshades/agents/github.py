@@ -27,7 +27,7 @@ class Github(Agent):
         organizations: List[str] = field(default_factory=list)
         repositories: List[str] = field(default_factory=list)
 
-    def mirror(self):
+    def do_mirror(self):
         try:
             import github
         except ModuleNotFoundError:

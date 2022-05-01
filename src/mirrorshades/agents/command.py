@@ -14,7 +14,7 @@ class Command(Agent):
         command: str
         attempts: int = 1
 
-    def mirror(self):
+    def do_mirror(self):
         for i in range(self.properties.attempts):
             if self.properties.attempts > 1:
                 suffix = f" [attempt {i+1} of {self.properties.attempts}]"

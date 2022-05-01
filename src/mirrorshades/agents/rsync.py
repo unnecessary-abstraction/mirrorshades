@@ -19,7 +19,7 @@ class RSync(Agent):
         host: str = ""
         user: str = ""
 
-    def mirror(self):
+    def do_mirror(self):
         dest = config.get().option("dest")
 
         for path in self.properties.paths:
