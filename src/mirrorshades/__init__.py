@@ -29,7 +29,7 @@ def main():
 
     logging.basicConfig(format="%(levelname)s: %(message)s", level=logging.INFO)
     args = parse_args()
-    cfg = config.load(args.config_path)
+    config.load(args.config_path)
 
-    for source in cfg.sources:
+    for source in config.sources:
         source.mirror()

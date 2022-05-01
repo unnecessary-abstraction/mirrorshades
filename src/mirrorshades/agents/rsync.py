@@ -38,7 +38,7 @@ class RSync(Agent):
         if path and path[0] == "/":
             path = path[1:]
 
-        dest = config.get().options.dest
+        dest = config.options.dest
 
         return os.path.dirname(os.path.join(dest, self.properties.name, path)) + "/"
 
@@ -61,7 +61,7 @@ class RSync(Agent):
                         "rsync",
                         "-aSH",
                         "--mkpath",
-                        *config.get().options.rsync_extra_args,
+                        *config.options.rsync_extra_args,
                         *self.properties.extra_args,
                         remote_path,
                         local_path,

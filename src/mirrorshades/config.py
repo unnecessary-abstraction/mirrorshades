@@ -12,7 +12,15 @@ from marshmallow.exceptions import ValidationError
 
 from . import agents
 
-_CONFIG = None
+cfg = None
+options = None
+sources = None
+
+
+@dataclass
+class Options:
+    dest: str = ""
+    rsync_extra_args: List[str] = field(default_factory=list)
 
 
 class Source:
@@ -25,41 +33,31 @@ class Source:
         return self.agent.mirror()
 
 
-class Config:
-    @dataclass
-    class Options:
-        dest: str = ""
-        rsync_extra_args: List[str] = field(default_factory=list)
+def parse_options():
+    global options
 
-    def parse_options(self):
-        schema = desert.schema(self.Options)
-        try:
-            self.options = schema.load(self._cfg.get("options", {}))
-        except ValidationError as e:
-            for field_name, message in e.normalized_messages().items():
-                if isinstance(message, list):
-                    message = " ".join(message)
-                logging.error(f"Validation error on option '{field_name}': {message}")
-            sys.exit(1)
+    schema = desert.schema(Options)
+    try:
+        options = schema.load(cfg.get("options", {}))
+    except ValidationError as e:
+        for field_name, message in e.normalized_messages().items():
+            if isinstance(message, list):
+                message = " ".join(message)
+            logging.error(f"Validation error on option '{field_name}': {message}")
+        sys.exit(1)
 
-    def parse_sources(self):
-        cfg_sources = self._cfg.get("sources", [])
-        self.sources = [
-            Source(name, properties) for name, properties in cfg_sources.items()
-        ]
 
-    def __init__(self, cfg):
-        self._cfg = cfg
-        self.parse_options()
-        self.parse_sources()
+def parse_sources():
+    global sources
+
+    cfg_sources = cfg.get("sources", [])
+    sources = [Source(name, properties) for name, properties in cfg_sources.items()]
 
 
 def load(filename):
-    global _CONFIG
+    global cfg
+
     f = open(filename, "r")
-    _CONFIG = Config(yaml.safe_load(f))
-    return _CONFIG
-
-
-def get():
-    return _CONFIG
+    cfg = yaml.safe_load(f)
+    parse_options()
+    parse_sources()
