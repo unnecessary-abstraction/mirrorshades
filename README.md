@@ -67,20 +67,24 @@ installed if you wish to use them in your configuration:
 
 ## Usage
 
-All significant options for mirrorshades are set via a YAML configuration file
-so command line invocation is very straightforward:
+All significant options for mirrorshades are set via a YAML configuration file.
+Command line arguments may optionally be used to specify the config file to use
+and to select one source defined in the config file to mirror (instead of
+mirroring all sources defined in the config file).
 
 ```
-usage: mirrorshades [-h] [--version] [config_path]
+usage: mirrorshades [-h] [--source SOURCE] [--version] [config_path]
 
 Data mirroring tool
 
 positional arguments:
-  config_path  path to the configuration file (defaults to 'mirrorshades.yml' in the current directory)
+  config_path           path to the configuration file (defaults to 'mirrorshades.yml' in the current directory)
 
-optional arguments:
-  -h, --help   show this help message and exit
-  --version    show program's version number and exit
+options:
+  -h, --help            show this help message and exit
+  --source SOURCE, -s SOURCE
+                        select a single source to synchronize
+  --version             show program's version number and exit
 ```
 
 ### Configuration example
@@ -96,6 +100,10 @@ options:
   # Select the destination where mirrored content will be written. If no
   # destination is given, the current directory will be used.
   dest: /srv/mirror
+
+  # Specify a list of additional command line arguments to be passed to all
+  # invocations of rsync by the rsync agent.
+  rsync_extra_options: ["-v"]
 
 # The core of a mirrorshades configuration file is the dictionary of
 # sources to mirror. The key of each source entry is used as the default
@@ -201,6 +209,39 @@ sources:
     # given rclone remote we can specify a single '.' path as shown here.
     paths:
       - '.'
+
+  # 'rsync' agent: Mirror local or remote data using rsync.
+  rsync:
+
+    # Remote host to sync from over ssh. This property is optional and may be
+    # used as an alternative to specifying the remote host in 'prefix'.
+    host: example.com
+
+    # Username to use when connecting to the remote host. This property is
+    # optional and may be used as an alternative to specifying the username in
+    # 'prefix'. This property may only be set if 'host' is also set.
+    user: root
+
+    # Prefix applied to all entries in 'paths'. This property is optional and
+    # may include remote connection details in the form 'user@host:path' (for
+    # ssh) or 'rsync://user@host:path' (for rsync protocol), where 'user@' is
+    # optional.
+    prefix: /srv
+
+    # List of paths to mirror. For each path entry, the full source path is
+    # constructed by prepending the 'host', 'user' and 'prefix' properties
+    # described above if they are provided. The destination path is constructed
+    # using only the global 'dest' option, source name and path entry. So for
+    # example, the 'www' path entry below will result in mirroring
+    # 'root@example.com:/srv/www' to '/srv/mirror/rsync/www'
+    paths:
+      - www
+      - ftp
+
+    # Specify a list of additional command line arguments to be passed to
+    # invocations of rsync for this source. These arguments are passed after
+    # those specified in the global 'extra_rsync_args' option.
+    extra_args: ["--delete-after"]
 
   # 'command' agent: Invoke a custom command to mirror arbitrary data. In
   # this example we use the 'mbsync' command to create a local mirror of
