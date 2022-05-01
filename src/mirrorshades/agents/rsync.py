@@ -31,7 +31,7 @@ class RSync(Agent):
                     remote += f"{self.properties.user}@"
                 remote += f"{self.properties.host}:"
             elif self.properties.user:
-                logging.error(f"`user` cannot be set without `host` in rsync agent")
+                logging.error("`user` cannot be set without `host` in rsync agent")
                 continue
 
             if self.properties.prefix:
@@ -40,10 +40,12 @@ class RSync(Agent):
                 prefixed_path = path
             full_path = remote + prefixed_path
 
-            if path and path[0] == '/':
+            if path and path[0] == "/":
                 path = path[1:]
 
-            local_path = os.path.dirname(os.path.join(dest, self.properties.name, path)) + "/"
+            local_path = (
+                os.path.dirname(os.path.join(dest, self.properties.name, path)) + "/"
+            )
 
             logging.info(f"Syncing `{full_path}` via rsync")
             subprocess.run(
