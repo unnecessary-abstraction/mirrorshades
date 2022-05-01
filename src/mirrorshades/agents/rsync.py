@@ -61,6 +61,7 @@ class RSync(Agent):
                         "rsync",
                         "-aSH",
                         "--mkpath",
+                        *config.get().options.rsync_extra_args,
                         *self.properties.extra_args,
                         remote_path,
                         local_path,

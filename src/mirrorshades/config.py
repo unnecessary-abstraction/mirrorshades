@@ -3,7 +3,8 @@
 
 import logging
 import sys
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from typing import List
 
 import desert
 import yaml
@@ -28,6 +29,7 @@ class Config:
     @dataclass
     class Options:
         dest: str = ""
+        rsync_extra_args: List[str] = field(default_factory=list)
 
     def parse_options(self):
         schema = desert.schema(self.Options)
