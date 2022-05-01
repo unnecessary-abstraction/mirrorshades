@@ -32,10 +32,10 @@ class Github(Agent):
             import github
         except ModuleNotFoundError:
             logging.error(
-                "The `PyGithub` python package is needed to mirror from Github."
+                "The 'PyGithub' python package is needed to mirror from Github."
             )
             logging.info(
-                "Please install `PyGithub` (for example, using `pip install PyGithub`)"
+                "Please install 'PyGithub' (for example, using 'pip install PyGithub')"
                 " and try again."
             )
             sys.exit(1)

@@ -44,7 +44,7 @@ class RSync(Agent):
 
     def validate_properties(self):
         if self.properties.user and not self.properties.host:
-            raise MirroringError("`user` cannot be set without `host` in rsync agent")
+            raise MirroringError("'user' cannot be set without 'host' in rsync agent")
 
     def do_mirror(self):
         self.validate_properties()
@@ -54,7 +54,7 @@ class RSync(Agent):
             remote_path = self.get_remote_path(path)
             local_path = self.get_local_path(path)
 
-            logging.info(f"Syncing `{remote_path}` via rsync")
+            logging.info(f"Syncing '{remote_path}' via rsync")
             try:
                 subprocess.run(
                     [

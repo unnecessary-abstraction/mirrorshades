@@ -43,6 +43,6 @@ class Agent:
         except MirroringError as err:
             logging.error(str(err))
             logging.error(
-                f"Mirroring source `{self.properties.name}` with agent "
-                f"`{self.properties.agent}` failed!"
+                f"Mirroring source '{self.properties.name}' with agent "
+                f"'{self.properties.agent}' failed!"
             )
