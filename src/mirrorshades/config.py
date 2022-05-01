@@ -1,14 +1,17 @@
 # Copyright (c) 2020-2021 Paul Barker <paul@pbarker.dev>
 # SPDX-License-Identifier: Apache-2.0
 
+import logging
+import sys
+from dataclasses import dataclass
+
+import desert
 import yaml
+from marshmallow.exceptions import ValidationError
 
 from . import agents
 
-_CONFIG = {}
-
-
-DEFAULT_OPTIONS = {"dest": ""}
+_CONFIG = None
 
 
 class Source:
@@ -22,17 +25,31 @@ class Source:
 
 
 class Config:
+    @dataclass
+    class Options:
+        dest: str = ""
+
+    def parse_options(self):
+        schema = desert.schema(self.Options)
+        try:
+            self.options = schema.load(self._cfg.get("options", {}))
+        except ValidationError as e:
+            for field_name, message in e.normalized_messages().items():
+                if isinstance(message, list):
+                    message = " ".join(message)
+                logging.error(f"Validation error on option '{field_name}': {message}")
+            sys.exit(1)
+
+    def parse_sources(self):
+        cfg_sources = self._cfg.get("sources", [])
+        self.sources = [
+            Source(name, properties) for name, properties in cfg_sources.items()
+        ]
+
     def __init__(self, cfg):
-        self.cfg = cfg
-
-    def sources(self):
-        cfg_sources = self.cfg.get("sources", [])
-        return [Source(name, properties) for name, properties in cfg_sources.items()]
-
-    def option(self, name):
-        options = self.cfg.get("options", {})
-        default_value = DEFAULT_OPTIONS.get(name)
-        return options.get(name, default_value)
+        self._cfg = cfg
+        self.parse_options()
+        self.parse_sources()
 
 
 def load(filename):

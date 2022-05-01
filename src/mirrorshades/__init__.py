@@ -31,5 +31,5 @@ def main():
     args = parse_args()
     cfg = config.load(args.config_path)
 
-    for source in cfg.sources():
+    for source in cfg.sources:
         source.mirror()

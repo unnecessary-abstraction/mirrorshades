@@ -18,7 +18,7 @@ class RClone(Agent):
         paths: List[str]
 
     def do_mirror(self):
-        dest = config.get().option("dest")
+        dest = config.get().options.dest
 
         for path in self.properties.paths:
             if path == ".":

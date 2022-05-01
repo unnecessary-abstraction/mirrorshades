@@ -38,7 +38,7 @@ class RSync(Agent):
         if path and path[0] == "/":
             path = path[1:]
 
-        dest = config.get().option("dest")
+        dest = config.get().options.dest
 
         return os.path.dirname(os.path.join(dest, self.properties.name, path)) + "/"
 
