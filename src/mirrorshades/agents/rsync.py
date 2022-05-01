@@ -4,11 +4,11 @@
 import logging
 import os
 import subprocess
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List
 
 from .. import config
-from .base import Agent
+from .base import Agent, MirroringError
 
 
 class RSync(Agent):
@@ -18,37 +18,54 @@ class RSync(Agent):
         prefix: str = ""
         host: str = ""
         user: str = ""
+        extra_args: List[str] = field(default_factory=list)
+
+    def get_remote_path(self, path):
+        remote = ""
+        if self.properties.host:
+            if self.properties.user:
+                remote += f"{self.properties.user}@"
+            remote += f"{self.properties.host}:"
+
+        if self.properties.prefix:
+            prefixed_path = os.path.join(self.properties.prefix, path)
+        else:
+            prefixed_path = path
+
+        return remote + prefixed_path
+
+    def get_local_path(self, path):
+        if path and path[0] == "/":
+            path = path[1:]
+
+        dest = config.get().option("dest")
+
+        return os.path.dirname(os.path.join(dest, self.properties.name, path)) + "/"
+
+    def validate_properties(self):
+        if self.properties.user and not self.properties.host:
+            raise MirroringError("`user` cannot be set without `host` in rsync agent")
 
     def do_mirror(self):
-        dest = config.get().option("dest")
+        self.validate_properties()
 
         for path in self.properties.paths:
             path = os.path.normpath(path)
+            remote_path = self.get_remote_path(path)
+            local_path = self.get_local_path(path)
 
-            remote = ""
-            if self.properties.host:
-                if self.properties.user:
-                    remote += f"{self.properties.user}@"
-                remote += f"{self.properties.host}:"
-            elif self.properties.user:
-                logging.error("`user` cannot be set without `host` in rsync agent")
-                continue
-
-            if self.properties.prefix:
-                prefixed_path = os.path.join(self.properties.prefix, path)
-            else:
-                prefixed_path = path
-            full_path = remote + prefixed_path
-
-            if path and path[0] == "/":
-                path = path[1:]
-
-            local_path = (
-                os.path.dirname(os.path.join(dest, self.properties.name, path)) + "/"
-            )
-
-            logging.info(f"Syncing `{full_path}` via rsync")
-            subprocess.run(
-                ["rsync", "-aSH", "--mkpath", full_path, local_path],
-                check=True,
-            )
+            logging.info(f"Syncing `{remote_path}` via rsync")
+            try:
+                subprocess.run(
+                    [
+                        "rsync",
+                        "-aSH",
+                        "--mkpath",
+                        *self.properties.extra_args,
+                        remote_path,
+                        local_path,
+                    ],
+                    check=True,
+                )
+            except subprocess.CalledProcessError:
+                raise MirroringError("rsync command failed")
