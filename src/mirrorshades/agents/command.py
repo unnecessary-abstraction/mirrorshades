@@ -14,13 +14,13 @@ class Command(Agent):
         command: str
         attempts: int = 1
 
-    def mirror(self):
+    def do_mirror(self):
         for i in range(self.properties.attempts):
             if self.properties.attempts > 1:
                 suffix = f" [attempt {i+1} of {self.properties.attempts}]"
             else:
                 suffix = ""
-            logging.info(f"Running `{self.properties.command}`{suffix}")
+            logging.info(f"Running '{self.properties.command}'{suffix}")
             try:
                 subprocess.run(self.properties.command, shell=True, check=True)
                 return

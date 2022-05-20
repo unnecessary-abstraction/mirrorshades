@@ -10,6 +10,10 @@ import desert
 from marshmallow.exceptions import ValidationError
 
 
+class MirroringError(Exception):
+    pass
+
+
 class Agent:
     @dataclass
     class Properties:
@@ -30,5 +34,15 @@ class Agent:
                 )
             sys.exit(1)
 
-    def mirror(self):
+    def do_mirror(self):
         raise NotImplementedError
+
+    def mirror(self):
+        try:
+            self.do_mirror()
+        except MirroringError as err:
+            logging.error(str(err))
+            logging.error(
+                f"Mirroring source '{self.properties.name}' with agent "
+                f"'{self.properties.agent}' failed!"
+            )

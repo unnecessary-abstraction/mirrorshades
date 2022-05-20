@@ -9,6 +9,7 @@ from .git import Git
 from .github import Github
 from .gitlab import Gitlab
 from .rclone import RClone
+from .rsync import RSync
 
 agents = {
     "command": Command,
@@ -16,6 +17,7 @@ agents = {
     "github": Github,
     "gitlab": Gitlab,
     "rclone": RClone,
+    "rsync": RSync,
 }
 
 

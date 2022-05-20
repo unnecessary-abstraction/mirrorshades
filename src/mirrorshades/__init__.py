@@ -3,6 +3,7 @@
 
 import argparse
 import logging
+import sys
 
 __version__ = "0.2.1-dev"
 
@@ -18,6 +19,7 @@ def parse_args():
         help="path to the configuration file (defaults to 'mirrorshades.yml' "
         "in the current directory)",
     )
+    parser.add_argument("--source", "-s", help="select a single source to synchronize")
     parser.add_argument(
         "--version", action="version", version=f"mirrorshades {__version__}"
     )
@@ -29,7 +31,14 @@ def main():
 
     logging.basicConfig(format="%(levelname)s: %(message)s", level=logging.INFO)
     args = parse_args()
-    cfg = config.load(args.config_path)
+    config.load(args.config_path)
 
-    for source in cfg.sources():
-        source.mirror()
+    if args.source:
+        try:
+            config.sources[args.source].mirror()
+        except KeyError:
+            logging.error(f"Source '{args.source}' does not exist in config file")
+            sys.exit(1)
+    else:
+        for source in config.sources.values():
+            source.mirror()
