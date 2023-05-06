@@ -276,4 +276,4 @@ If you find any bugs or have a feature request feel free to open a ticket in the
 To submit patches to mirrorshades please fork the repository on GitHub and open
 a [pull request](https://github.com/unnecessary-abstraction/mirrorshades/pulls)
 where your changes are ready to merge. Pull requests should generally be
-targeted at the `dev` branch.
+targeted at the `main` branch.
