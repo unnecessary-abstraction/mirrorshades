@@ -3,6 +3,9 @@ Copyright (c) 2020-2022 Paul Barker <paul@pbarker.dev>
 SPDX-License-Identifier: CC-BY-4.0
 -->
 
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/unnecessary-abstraction/mirrorshades/main.svg)](https://results.pre-commit.ci/latest/github/unnecessary-abstraction/mirrorshades/main)
+[![PyPI](https://img.shields.io/pypi/v/mirrorshades)](https://pypi.org/project/mirrorshades/)
+
 # mirrorshades
 
 [mirrorshades](https://github.com/unnecessary-abstraction/mirrorshades)
