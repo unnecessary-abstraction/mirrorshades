@@ -1,9 +1,7 @@
 # Copyright (c) 2020-2022 Paul Barker <paul@pbarker.dev>
 # SPDX-License-Identifier: Apache-2.0
 
-import logging
-import sys
-
+from .. import ConfigurationError
 from .command import Command
 from .git import Git
 from .github import Github
@@ -21,7 +19,7 @@ agents = {
 }
 
 
-def get(properties):
+def get(properties, options):
     # The default connection method for a source is the name of the source
     # itself
     if "agent" not in properties:
@@ -29,6 +27,5 @@ def get(properties):
     try:
         agent_ctor = agents[properties["agent"]]
     except KeyError:
-        logging.error(f"No such agent: {properties['agent']}")
-        sys.exit(1)
-    return agent_ctor(properties)
+        raise ConfigurationError(f"No such agent: {properties['agent']}")
+    return agent_ctor(properties, options)

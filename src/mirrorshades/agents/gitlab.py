@@ -56,5 +56,5 @@ class Gitlab(Agent):
             "url_prefix": url_prefix,
             "repositories": repositories,
         }
-        git = Git(git_properties)
+        git = Git(git_properties, self.options)
         git.mirror()

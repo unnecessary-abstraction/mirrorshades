@@ -7,7 +7,6 @@ import subprocess
 from dataclasses import dataclass
 from typing import List
 
-from .. import config
 from .base import Agent
 
 
@@ -18,7 +17,7 @@ class RClone(Agent):
         paths: List[str]
 
     def do_mirror(self):
-        dest = config.options.dest
+        dest = self.options.dest
 
         for path in self.properties.paths:
             if path == ".":
