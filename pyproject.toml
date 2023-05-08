@@ -15,3 +15,6 @@ plugins.md013.code_blocks = false
 pythonpath = [
   "src"
 ]
+markers = [
+  "network: Tests which require network access"
+]

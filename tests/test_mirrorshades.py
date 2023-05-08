@@ -53,6 +53,7 @@ def test_unknown_source():
         cfg.mirror_one("wibble")
 
 
+@pytest.mark.network
 def test_git(tmp_path):
     os.chdir(tmp_path)
     config_dict = {
