@@ -8,6 +8,6 @@ from os.path import dirname, join
 src_path = join(dirname(__file__), "src")
 sys.path.insert(0, src_path)
 
-import mirrorshades  # noqa: E402
+from mirrorshades.__main__ import main  # noqa: E402
 
-mirrorshades.main()
+main()
