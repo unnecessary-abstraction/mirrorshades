@@ -7,3 +7,6 @@ requires = [
   "wheel",
 ]
 build-backend = "setuptools.build_meta"
+
+[tool.pymarkdown]
+plugins.md013.code_blocks = false
