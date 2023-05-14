@@ -27,8 +27,8 @@ class Gitlab(Agent):
                 "The 'python-gitlab' python package is needed to mirror from GitLab."
             )
             logging.info(
-                "Please install 'python-gitlab' (for example, using 'pip install python-gitlab')"
-                " and try again."
+                "Please install 'python-gitlab' (for example, using "
+                "'pip install python-gitlab') and try again."
             )
             sys.exit(1)
 

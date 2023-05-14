@@ -23,7 +23,10 @@ class Agent:
             self.properties = schema.load(properties)
         except ValidationError as e:
             name = properties.get("name", "(unknown)")
-            msg = f"Validation errors occurred on the following properties for source '{name}':"
+            msg = (
+                "Validation errors occurred on the following properties for "
+                f"source '{name}':"
+            )
             for field_name, message in e.normalized_messages().items():
                 if isinstance(message, list):
                     message = " ".join(message)

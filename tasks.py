@@ -33,7 +33,8 @@ def release(c, version):
     """Release a version of the project"""
     clean(c)
     c.run(
-        f"sed -i 's/^\\(__version__ =\\).*$/\\1 \"{version}\"/' src/mirrorshades/__init__.py"
+        f"sed -i 's/^\\(__version__ =\\).*$/\\1 \"{version}\"/' "
+        "src/mirrorshades/__init__.py"
     )
     c.run(f"git commit -s -m 'Release {version}' src/mirrorshades/__init__.py")
     build(c)
