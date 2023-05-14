@@ -7,8 +7,8 @@ import subprocess
 from dataclasses import dataclass, field
 from typing import List
 
-from .. import config
-from .base import Agent, MirroringError
+from .. import ConfigurationError, ExecutionError
+from .base import Agent
 
 
 class RSync(Agent):
@@ -38,17 +38,17 @@ class RSync(Agent):
         if path and path[0] == "/":
             path = path[1:]
 
-        dest = config.options.dest
+        dest = self.options.dest
 
         return os.path.dirname(os.path.join(dest, self.properties.name, path)) + "/"
 
     def validate_properties(self):
         if self.properties.user and not self.properties.host:
-            raise MirroringError("'user' cannot be set without 'host' in rsync agent")
+            raise ConfigurationError(
+                "'user' cannot be set without 'host' in rsync agent"
+            )
 
     def do_mirror(self):
-        self.validate_properties()
-
         for path in self.properties.paths:
             path = os.path.normpath(path)
             remote_path = self.get_remote_path(path)
@@ -61,7 +61,7 @@ class RSync(Agent):
                         "rsync",
                         "-aSH",
                         "--mkpath",
-                        *config.options.rsync_extra_args,
+                        *self.options.rsync_extra_args,
                         *self.properties.extra_args,
                         remote_path,
                         local_path,
@@ -69,4 +69,4 @@ class RSync(Agent):
                     check=True,
                 )
             except subprocess.CalledProcessError:
-                raise MirroringError("rsync command failed")
+                raise ExecutionError("rsync command failed")

@@ -1,43 +1,40 @@
+# mirrorshades
+
 <!--
 Copyright (c) 2020-2022 Paul Barker <paul@pbarker.dev>
 SPDX-License-Identifier: CC-BY-4.0
 -->
 
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/unnecessary-abstraction/mirrorshades/main.svg)](https://results.pre-commit.ci/latest/github/unnecessary-abstraction/mirrorshades/main)
-[![PyPI](https://img.shields.io/pypi/v/mirrorshades)](https://pypi.org/project/mirrorshades/)
+[![pre-commit.ci status][pre-commit badge]][pre-commit link]
+[![PyPI][pypi badge]][pypi link]
 
-# mirrorshades
+[pre-commit badge]:     https://results.pre-commit.ci/badge/github/unnecessary-abstraction/mirrorshades/main.svg
+[pre-commit link]:      https://results.pre-commit.ci/latest/github/unnecessary-abstraction/mirrorshades/main
+[pypi badge]:           https://img.shields.io/pypi/v/mirrorshades
+[pypi link]:            https://pypi.org/project/mirrorshades/
 
-[mirrorshades](https://github.com/unnecessary-abstraction/mirrorshades)
-is a tool for mirroring data from remote sources.
-
-Copyright (c) 2020-2022 Paul Barker.
-
-In this repository,
-code files are distributed under the
-[Apache 2.0 License](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0)),
-documentation files are distributed under the
-[CC BY 4.0 License](https://tldrlegal.com/license/creative-commons-attribution-4.0-international-(cc-by-4))
-and trivial data files are distributed under the
-[CC0 1.0 License](https://tldrlegal.com/license/creative-commons-cc0-1.0-universal).
-
-## Summary
+An easily extensible tool for mirroring data from git repositories, cloud
+storage, mail servers and other remote sources.
 
 Mirrorshades was written to help maintain mirrors and backups by regularly
-pulling content from remote locations. Tools such as rsync, rclone, `git clone
---mirror`, etc already exist and can easily be used to create local mirrors of
-remote content. What mirrorshades provides is a single command to update a set
-of mirrors of different types of content from various remote sources. For
-example, the author uses mirrorshades to sync content from Dropbox, GitLab and
-multiple mail servers to a local mirror on a nightly basis for disaster
-recovery purposes.
+pulling content from remote locations. Tools such as rsync, rclone and `git
+clone --mirror` already exist, but what this tool provides is integration and
+automation. A single invocation of mirrorshades can update a set of mirrors of
+different types of content from various remote sources. For example, the author
+uses this tool to sync content from Dropbox, GitLab and multiple mail servers
+to a local mirror on a nightly basis for disaster recovery purposes.
 
-All the details of how to pull down the desired content are stored in the
-configuration file, it is intended that command line arguments to mirrorshades
-remain as minimal as possible and that the config file is the single source of
-truth to control the operation of the utility. This makes it very easy to invoke
-mirrorshades regularly and reliably using cron, systemd timers or any other
-automation mechanism.
+A configuration file is used to control the operation of mirrorshades, and
+command line arguments are kept to a minimum. This makes it easy to invoke the
+tool regularly and reliably. In line with the [Unix philosophy][], mirrorshades
+does not include any way to schedule when mirrors are updated. Instead, it is
+expected that [systemd timers][] or a cron implementation (such as [cronie][] or
+[yacron][]) will be used if scheduling is required.
+
+[Unix philosophy]:      https://en.wikipedia.org/wiki/Unix_philosophy
+[systemd timers]:       https://opensource.com/article/20/7/systemd-timers
+[cronie]:               https://github.com/cronie-crond/cronie
+[yacron]:               https://pypi.org/project/yacron/
 
 Mirrorshades is intended to be trivial to extend to handle new types of remote
 source. Users familiar with Python are encouraged to look at the source code
@@ -48,25 +45,32 @@ appreciate them!
 
 ## Installation
 
-Mirrorshades is published on [PyPI](https://pypi.org/) so the following command
-is usually sufficient to install the application:
+Mirrorshades is published on [PyPI][] so the following command is usually
+sufficient to install the application:
 
-```
+[pypi]:                 https://pypi.org/
+
+```shell
 pip install mirrorshades
 ```
 
 The following mirroring agents have additional dependencies which must be
 installed if you wish to use them in your configuration:
 
-* `git`: Requires the [git](https://git-scm.com/) command line tool.
+* `git`: Requires the [git][] command line tool.
 
-* `github`: Requires the Python module [PyGithub](https://pypi.org/project/PyGithub/)
-  and the [git](https://git-scm.com/) command line tool.
+* `github`: Requires the Python module [PyGithub][] and the [git][] command line
+  tool.
 
-* `gitlab`: Requires the Python module [python-gitlab](https://pypi.org/project/python-gitlab/)
-  and the [git](https://git-scm.com/) command line tool.
+* `gitlab`: Requires the Python module [python-gitlab][] and the [git][] command
+  line tool.
 
-* `rclone`: Requires the [rclone](https://rclone.org/) command line tool.
+* `rclone`: Requires the [rclone][] command line tool.
+
+[git]:                  https://git-scm.com/
+[pygithub]:             https://pypi.org/project/PyGithub/
+[python-gitlab]:        https://pypi.org/project/python-gitlab/
+[rclone]:               https://rclone.org/
 
 ## Usage
 
@@ -75,7 +79,7 @@ Command line arguments may optionally be used to specify the config file to use
 and to select one source defined in the config file to mirror (instead of
 mirroring all sources defined in the config file).
 
-```
+```text
 usage: mirrorshades [-h] [--source SOURCE] [--version] [config_path]
 
 Data mirroring tool
@@ -268,15 +272,35 @@ sources:
     attempts: 5
 ```
 
+## Maintainers
+
+* Paul Barker [:envelope:](mailto:paul@pbarker.dev)
+
 ## Contribution
 
 mirrorshades is developed on GitHub at
 <https://github.com/unnecessary-abstraction/mirrorshades>.
 
 If you find any bugs or have a feature request feel free to open a ticket in the
-[issue tracker](https://github.com/unnecessary-abstraction/mirrorshades/issues).
+[issue tracker][].
 
 To submit patches to mirrorshades please fork the repository on GitHub and open
-a [pull request](https://github.com/unnecessary-abstraction/mirrorshades/pulls)
-where your changes are ready to merge. Pull requests should generally be
-targeted at the `main` branch.
+a [pull request][] where your changes are ready to merge. Pull requests should
+generally be targeted at the `main` branch.
+
+[issue tracker]:        https://github.com/unnecessary-abstraction/mirrorshades/issues
+[pull request]:         https://github.com/unnecessary-abstraction/mirrorshades/pulls
+
+## License
+
+Copyright (c) 2020-2023, mirrorshades contributors.
+
+* Code files are distributed under the [Apache-2.0 License][].
+
+* Documentation files are distributed under the [CC-BY-4.0 License][].
+
+* Trivial data files are distributed under the [CC0-1.0 License][].
+
+[Apache-2.0 License]:   https://tldrlegal.com/license/apache-license-2.0-(apache-2.0)
+[CC-BY-4.0 License]:    https://tldrlegal.com/license/creative-commons-attribution-4.0-international-(cc-by-4)
+[CC0-1.0 License]:      https://tldrlegal.com/license/creative-commons-cc0-1.0-universal

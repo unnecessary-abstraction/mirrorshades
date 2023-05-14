@@ -2,16 +2,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 
-import logging
-import sys
 from dataclasses import dataclass
 
 import desert
 from marshmallow.exceptions import ValidationError
 
-
-class MirroringError(Exception):
-    pass
+from .. import ConfigurationError, ExecutionError
 
 
 class Agent:
@@ -20,19 +16,26 @@ class Agent:
         name: str
         agent: str
 
-    def __init__(self, properties):
+    def __init__(self, properties, options):
+        self.options = options
         schema = desert.schema(self.Properties)
         try:
             self.properties = schema.load(properties)
         except ValidationError as e:
             name = properties.get("name", "(unknown)")
+            msg = (
+                "Validation errors occurred on the following properties for "
+                f"source '{name}':"
+            )
             for field_name, message in e.normalized_messages().items():
                 if isinstance(message, list):
                     message = " ".join(message)
-                logging.error(
-                    f"Validation error on field '{field_name}' for source '{name}': {message}"
-                )
-            sys.exit(1)
+                msg += f"\n\t'{field_name}': {message}"
+            raise ConfigurationError(msg)
+        self.validate_properties()
+
+    def validate_properties(self):
+        pass
 
     def do_mirror(self):
         raise NotImplementedError
@@ -40,9 +43,9 @@ class Agent:
     def mirror(self):
         try:
             self.do_mirror()
-        except MirroringError as err:
-            logging.error(str(err))
-            logging.error(
+        except ExecutionError as e:
+            # Re-raise the error with more context
+            raise ExecutionError(
                 f"Mirroring source '{self.properties.name}' with agent "
-                f"'{self.properties.agent}' failed!"
+                f"'{self.properties.agent}' failed: {e}"
             )

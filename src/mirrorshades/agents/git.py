@@ -8,7 +8,6 @@ from dataclasses import dataclass
 from typing import List
 from urllib.parse import urljoin
 
-from .. import config
 from .base import Agent
 
 
@@ -33,7 +32,7 @@ class Git(Agent):
         url_prefix: str = ""
 
     def do_mirror(self):
-        dest = config.options.dest
+        dest = self.options.dest
 
         for repo in self.properties.repositories:
             url = urljoin(self.properties.url_prefix, repo)
