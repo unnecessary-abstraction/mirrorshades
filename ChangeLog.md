@@ -16,6 +16,8 @@ User visible changes since v0.2.0:
 * Added `-s` / `--source` argument which instructs mirrorshades to sync only the
   named source ([issue 14][]).
 
+* Tidied up and improved the readme file ([issue 25][]).
+
 * Improved config validation, error handling and error messages.
 
 Developer visible changes since v0.2.0:
@@ -27,11 +29,16 @@ Developer visible changes since v0.2.0:
 
 * Various source layout & architecture improvements ([issue 26][]).
 
+* Added test cases using pytest which automatically run via GitHub Actions
+  on pushes to the repository ([issue 31][]).
+
 [issue 12]: https://github.com/unnecessary-abstraction/mirrorshades/issues/12
 [issue 14]: https://github.com/unnecessary-abstraction/mirrorshades/issues/14
 [issue 23]: https://github.com/unnecessary-abstraction/mirrorshades/issues/23
 [issue 24]: https://github.com/unnecessary-abstraction/mirrorshades/issues/24
+[issue 25]: https://github.com/unnecessary-abstraction/mirrorshades/issues/25
 [issue 26]: https://github.com/unnecessary-abstraction/mirrorshades/issues/26
+[issue 31]: https://github.com/unnecessary-abstraction/mirrorshades/issues/31
 
 ## 0.2.0
 
