@@ -34,6 +34,6 @@ repos:
     hooks:
     -   id: isort
 -   repo: https://github.com/jackdewinter/pymarkdown
-    rev: d4268139457f7e21b763572a80ea85844a0ed9f5
+    rev: v0.9.9
     hooks:
         - id: pymarkdown
