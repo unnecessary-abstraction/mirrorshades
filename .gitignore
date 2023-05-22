@@ -31,3 +31,4 @@ share/python-wheels/
 MANIFEST
 
 /release
+/.venv
