@@ -1,7 +1,7 @@
 # ChangeLog for mirrorshades
 
 <!--
-Copyright (c) 2020-2022 Paul Barker <paul@pbarker.dev>
+Copyright The mirrorshades Contributors.
 SPDX-License-Identifier: CC-BY-4.0
 -->
 

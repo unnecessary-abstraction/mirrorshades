@@ -1,4 +1,4 @@
-# Copyright (c) 2020-2021 Paul Barker <paul@pbarker.dev>
+# Copyright The mirrorshades Contributors.
 # SPDX-License-Identifier: Apache-2.0
 
 __version__ = "0.3.0-dev"

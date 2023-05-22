@@ -1,4 +1,4 @@
-# Copyright (c) 2022 Paul Barker <paul@pbarker.dev>
+# Copyright The mirrorshades Contributors.
 # SPDX-License-Identifier: Apache-2.0
 
 import logging
