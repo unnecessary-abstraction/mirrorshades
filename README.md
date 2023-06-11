@@ -291,6 +291,55 @@ generally be targeted at the `main` branch.
 [issue tracker]:        https://github.com/unnecessary-abstraction/mirrorshades/issues
 [pull request]:         https://github.com/unnecessary-abstraction/mirrorshades/pulls
 
+### Setting up a development environment
+
+The best way to setup a development environment for this project is to create a
+[venv][] then make an [editable installation][] of mirrorshades into this new
+venv, along with all the required development dependencies. This can be done
+using the following commands:
+
+[venv]: https://docs.python.org/3/tutorial/venv.html
+[editable installation]: https://setuptools.pypa.io/en/latest/userguide/development_mode.html
+
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -e .[test,github,gitlab,development]
+```
+
+### Testing changes
+
+When a pull request is opened on GitHub for this project, automated testing will
+be performed to validate the proposed changes. It can also be helpful to run
+these automated tests locally during development to catch any potential issues
+prior to submission of a PR.
+
+Two tools are used in the automated testing of this project:
+
+* [pre-commit][] is used to perform linting, check code formatting, catch common
+  errors and ensure that licensing information for the project is complete.
+
+* [pytest][] is used to run a suite of unit and integrations tests to ensure that
+  the program behaviour is correct.
+
+[pre-commit]: https://pre-commit.com/
+[pytest]: https://pytest.org/
+
+All automated tests can be run using the following commands:
+
+```sh
+pre-commit run -a
+pytest
+```
+
+Additionally, you may wish to install the pre-commit git hook so that the
+pre-commit tests run on every `git commit` operation. This can be achieved using
+the following command:
+
+```sh
+pre-commit install
+```
+
 ## License
 
 Copyright (c) 2020-2023, mirrorshades contributors.
