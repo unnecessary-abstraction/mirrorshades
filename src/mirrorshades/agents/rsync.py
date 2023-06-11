@@ -3,11 +3,11 @@
 
 import logging
 import os
-import subprocess
 from dataclasses import dataclass, field
 from typing import List
 
-from .. import ConfigurationError, ExecutionError
+from .. import ConfigurationError
+from ..util import runcmd
 from .base import Agent
 
 
@@ -55,18 +55,12 @@ class RSync(Agent):
             local_path = self.get_local_path(path)
 
             logging.info(f"Syncing '{remote_path}' via rsync")
-            try:
-                subprocess.run(
-                    [
-                        "rsync",
-                        "-aSH",
-                        "--mkpath",
-                        *self.options.rsync_extra_args,
-                        *self.properties.extra_args,
-                        remote_path,
-                        local_path,
-                    ],
-                    check=True,
-                )
-            except subprocess.CalledProcessError:
-                raise ExecutionError("rsync command failed")
+            runcmd(
+                "rsync",
+                "-aSH",
+                "--mkpath",
+                *self.options.rsync_extra_args,
+                *self.properties.extra_args,
+                remote_path,
+                local_path,
+            )

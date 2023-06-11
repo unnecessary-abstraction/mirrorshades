@@ -3,10 +3,10 @@
 
 import logging
 import os
-import subprocess
 from dataclasses import dataclass
 from typing import List
 
+from ..util import runcmd
 from .base import Agent
 
 
@@ -25,7 +25,4 @@ class RClone(Agent):
             full_path = ":".join([self.properties.remote, path])
             local_path = os.path.join(dest, self.properties.name, path)
             logging.info(f"Syncing '{full_path}' via rclone")
-            subprocess.run(
-                ["rclone", "sync", "--create-empty-src-dirs", full_path, local_path],
-                check=True,
-            )
+            runcmd("rclone", "sync", "--create-empty-src-dirs", full_path, local_path)
