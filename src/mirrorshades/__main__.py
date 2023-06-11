@@ -37,7 +37,16 @@ def parse_args():
 
 
 def get_log_level(log_level_name):
-    return logging.getLevelNamesMapping()[log_level_name]
+    if log_level_name == "DEBUG":
+        return logging.DEBUG
+    if log_level_name == "INFO":
+        return logging.INFO
+    if log_level_name == "WARNING":
+        return logging.WARNING
+    if log_level_name == "ERROR":
+        return logging.ERROR
+    if log_level_name == "CRITICAL":
+        return logging.CRITICAL
 
 
 def main():
