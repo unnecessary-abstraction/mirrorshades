@@ -3,7 +3,7 @@
 
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
     -   id: check-added-large-files
     -   id: check-case-conflict
@@ -22,11 +22,11 @@ repos:
     hooks:
     -   id: reuse
 -   repo: https://github.com/psf/black
-    rev: 24.4.2
+    rev: 24.10.0
     hooks:
     -   id: black
 -   repo: https://github.com/PyCQA/flake8
-    rev: 7.1.0
+    rev: 7.1.1
     hooks:
     -   id: flake8
 -   repo: https://github.com/pycqa/isort
@@ -34,6 +34,6 @@ repos:
     hooks:
     -   id: isort
 -   repo: https://github.com/jackdewinter/pymarkdown
-    rev: v0.9.21
+    rev: v0.9.24
     hooks:
         - id: pymarkdown
